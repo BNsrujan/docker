@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# List all running containers
+docker ps
+
+# List all Docker images (including intermediate ones)
+docker image ls --all
+docker image ls -a
+
+# List all Docker containers (including stopped ones)
+docker container list --all
+
+# Enter into a running container
+docker exec -it <container_id> bash
+
+# Build a Docker image from a Dockerfile in the current directory
+sudo docker build . -t <image_name>
+
+# Run the Docker image with interactive terminal
+sudo docker run -it <image_name> bash
+
+# Run the Docker image and map ports
+sudo docker run -p 8000:8000 <image_name>
+
+# Log into DockerHub
+sudo docker login
+
+# Push the image to a repository on DockerHub
+sudo docker push <user_name>/<repo_name>
+
+# Create a Docker volume
+sudo docker create volume <volume_name>
+
+# Run a container with a volume and port mapping
+sudo docker run -v <volume_name>:<container_directory> -p 8000:8000 <docker_image_id>
+sudo docker run -v <volume_name>:<container_directory> -p 8000:8000 <docker_image_id> bash
+
+# Run a MongoDB container and attach it to a network
+sudo docker run -v volume_database:/data/db --name mongo_database --network mongo_network -p 27017:27017 -d mongo
+
+# Run a Node.js app container and connect it to the MongoDB container
+sudo docker run -p 3000:3000 --network mongo_network -e MONGO_URL=mongodb://mongo_database:27017/todos node_app
+
+# List all Docker volumes
+sudo docker volume ls
+
+# Inspect a Docker volume
+sudo docker volume inspect <volume_name>
+
+# Remove a specific volume
+sudo docker volume rm <volume_name>
+
+# Prune (remove) all unused volumes
+sudo docker volume prune
+
+# Create a named volume
+sudo docker volume create --name <volume_name>
+
+# Copy files from a container to the host
+sudo docker cp <container_id>:<container_directory> <host_directory>
+
+# Create a Docker network
+sudo docker create network <network_name>
+
+# List all Docker networks
+sudo docker network ls
+
+# Inspect a specific Docker network
+sudo docker network inspect <network_name>
+
+# Connect a container to a specific network
+sudo docker network connect <network_name> <container_id>
+
+# Remove a Docker container by ID
+sudo docker kill <container_id>
+
+# Remove a Docker volume by name
+sudo docker volume rm volume_database
+
+# Remove all Docker volumes
+sudo docker volume rm $(sudo docker volume ls -q)
+
+# List all containers again
+sudo docker ps -a
+
+# List only running containers
+sudo docker ps
+
+# Remove all stopped containers
+sudo docker rm $(sudo docker ps -a -q)
