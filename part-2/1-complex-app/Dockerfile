@@ -1,12 +1,12 @@
-FROM node:20
+FROM ubuntu:latest
 
 WORKDIR /usr/src/app
 
-COPY package* .
+
+COPY . .
 
 RUN npm install
 
-COPY . .
 
 EXPOSE 3000
 

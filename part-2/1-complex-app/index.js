@@ -17,7 +17,7 @@ const Entry = mongoose.model('Entry', EntrySchema);
 
 app.get('/', async (req, res) => {
   try {
-    const entry = new Entry({ text: 'This is an entry by harkirat' });
+    const entry = new Entry({ text: 'this is srujan' });
     await entry.save();
     res.send('Entry added!');
   } catch (err) {
